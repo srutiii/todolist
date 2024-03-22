@@ -1,5 +1,7 @@
 "use client";
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const page = () => {
   const [task, setTask] = useState("");
@@ -9,13 +11,14 @@ const page = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     if (task == "") {
-      alert("Task field is empty...");
+      toast.error("Task field is empty...");
       return
     } else {
       setMainTask([...mainTask, { task, des }]);
       // console.log(task, des);
       setTask("");
       setDes("");
+      toast.success("Task added successfully.")
     }
   };
 
@@ -37,6 +40,7 @@ const page = () => {
     let copyTask = [...mainTask];
     copyTask.splice(i, 1);
     setMainTask(copyTask);
+    toast.success("Task deleted successfully")
   };
 
   return (
@@ -102,6 +106,7 @@ const page = () => {
           </div>
         )}
       </div>
+      <ToastContainer/>
     </div>
   );
 };
